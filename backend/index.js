@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from "morgan";
 // Routes
 import userRouter from './routes/user.js';
+import tourRouter from './routes/tour.js';
 
 const app = express();
 
@@ -12,7 +13,8 @@ app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-app.use('/user', userRouter)
+app.use('/user', userRouter);
+app.use('/tour', tourRouter);
 
 const MONGODB_URL = 'mongodb+srv://goncalosantos:Benfica190482@cluster0.m5dotvo.mongodb.net/?retryWrites=true&w=majority';
 const port = 4000;

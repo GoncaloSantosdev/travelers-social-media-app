@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 // MUI
 import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
 import LocalAirportIcon from '@mui/icons-material/LocalAirport';
-import MenuIcon from '@mui/icons-material/Menu';
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setLogout } from '../../redux/features/authSlice';
