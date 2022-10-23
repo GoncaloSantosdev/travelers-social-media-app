@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { createTour } from '../redux/features/tourSlice';
+import { createTour, updateTour } from '../redux/features/tourSlice';
 // File Base
 import FileBase from 'react-file-base64';
 // MUI
@@ -18,10 +18,20 @@ const AddEditTour = () => {
   const [tourData, setTourData] = useState(initialState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {error, loading} = useSelector((state) => ({ ...state.tour }));
+  const params = useParams();
+  const { error, userTours } = useSelector((state) => ({ ...state.tour }));
   const { user } = useSelector((state) => ({ ...state.auth }))
 
   const { title, description } = tourData;
+  const { id } = useParams();
+
+  useEffect(() => {
+    if(id){
+      const singleTour = userTours.find((tour) => tour._id === id);
+      console.log(userTours);
+      setTourData({ ...singleTour }); 
+    }
+  }, [id])
 
   useEffect(() => {
     error && console.log(error);
@@ -33,7 +43,11 @@ const AddEditTour = () => {
     if(title && description){
       const updatedTourData = {...tourData, name: user?.result?.name}
 
-      dispatch(createTour({updatedTourData, navigate}));
+      if(!id){
+        dispatch(createTour({updatedTourData, navigate}));
+      } else {
+        dispatch(updateTour({id, updatedTourData, navigate}));
+      }
     }
   };
 
@@ -47,7 +61,7 @@ const AddEditTour = () => {
     <Grid item  component={Paper}>
       <Box p={5} textAlign='center'>
         <Typography component="h1" variant="h5">
-          Create Tour
+          <>{id ? 'Update Post' : 'Create Post'}</>
         </Typography>
         <form noValidate style={{ marginTop: '2rem'}} onSubmit={handleSubmit}>
           <TextField
@@ -88,7 +102,7 @@ const AddEditTour = () => {
               variant="contained"
               color="primary"
             >
-              Create Tour
+               <>{id ? 'Update Post' : 'Create Post'}</>
             </Button>
           </Box>
         </form>

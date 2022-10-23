@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 // Pages
-import { AddEditTour, Home, Login, Register, SingleTour } from './pages';
+import { AddEditTour, Home, Login, Profile, Register, SingleTour } from './pages';
 // React Router
 import { Routes, Route } from 'react-router-dom'; 
 // Components
@@ -28,6 +28,7 @@ function App() {
         <Route path='/addTour' element={<AddEditTour />} />
         <Route path='/editTour/:id' element={<AddEditTour />} />
         <Route path='/tour/:id' element={<SingleTour />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </>
   );

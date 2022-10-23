@@ -47,41 +47,41 @@ export const getToursByUser = async (req, res) => {
   res.status(200).json(userTours);
 };
 
-// export const deleteTour = async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     if (!mongoose.Types.ObjectId.isValid(id)) {
-//       return res.status(404).json({ message: `No tour exist with id: ${id}` });
-//     }
-//     await TourModal.findByIdAndRemove(id);
-//     res.json({ message: "Tour deleted successfully" });
-//   } catch (error) {
-//     res.status(404).json({ message: "Something went wrong" });
-//   }
-// };
+export const deleteTour = async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ message: `Invalid Post: ${id}` });
+    }
+    await TourModal.findByIdAndRemove(id);
+    res.json({ message: "Post deleted successfully" });
+  } catch (error) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
+};
 
-// export const updateTour = async (req, res) => {
-//   const { id } = req.params;
-//   const { title, description, creator, imageFile, tags } = req.body;
-//   try {
-//     if (!mongoose.Types.ObjectId.isValid(id)) {
-//       return res.status(404).json({ message: `No tour exist with id: ${id}` });
-//     }
+export const updateTour = async (req, res) => {
+  const { id } = req.params;
+  const { title, description, creator, imageFile } = req.body;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ message: `Invalid Post: ${id}` });
+    }
 
-//     const updatedTour = {
-//       creator,
-//       title,
-//       description,
-//       tags,
-//       imageFile,
-//       _id: id,
-//     };
-//     await TourModal.findByIdAndUpdate(id, updatedTour, { new: true });
-//     res.json(updatedTour);
-//   } catch (error) {
-//     res.status(404).json({ message: "Something went wrong" });
-//   }
-// };
+    const updatedTour = {
+      creator,
+      title,
+      description,
+      imageFile,
+      _id: id,
+    };
+    
+    await TourModal.findByIdAndUpdate(id, updatedTour, { new: true });
+    res.json(updatedTour);
+  } catch (error) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
+};
 
 // export const getToursBySearch = async (req, res) => {
 //   const { searchQuery } = req.query;
