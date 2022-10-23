@@ -1,12 +1,24 @@
 import React from 'react';
 // React Router
 import { Link } from 'react-router-dom';
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { likeTour } from '../../redux/features/tourSlice';
 // MUI
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
-const CardTour = ({ imageFile, description, title, _id, name }) => {
+const CardTour = ({ imageFile, description, title, _id, name, likes }) => {
+  const dispatch = useDispatch();
+  
+  const { user } = useSelector((state) => ({...state.auth}));
+  const userId = user?.result?._id;
+
+  const handleClick = () => {
+    dispatch(likeTour({_id}));
+  }
+
   return (
     <Card sx={{ maxWidth: 345 }}>
     <CardHeader
@@ -35,8 +47,9 @@ const CardTour = ({ imageFile, description, title, _id, name }) => {
       </Typography>
     </CardContent>
     <CardActions disableSpacing>
-      <IconButton aria-label="add to favorites">
-        <FavoriteIcon />
+      <IconButton aria-label="like post" onClick={handleClick}>
+        <ThumbUpIcon />
+        <Typography>{likes.length}</Typography>
       </IconButton>
     <Link to={`/tour/${_id}`}>
       <Button variant='contained'>
@@ -48,4 +61,4 @@ const CardTour = ({ imageFile, description, title, _id, name }) => {
   )
 }
 
-export default CardTour
+export default CardTour;

@@ -95,33 +95,34 @@ export const getToursBySearch = async (req, res) => {
 };
 
 
-// export const likeTour = async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     if (!req.userId) {
-//       return res.json({ message: "User is not authenticated" });
-//     }
+export const likeTour = async (req, res) => {
+  const { id } = req.params;
+  try {
+    if (!req.userId) {
+      return res.json({ message: "User is not authenticated" });
+    }
 
-//     if (!mongoose.Types.ObjectId.isValid(id)) {
-//       return res.status(404).json({ message: `No tour exist with id: ${id}` });
-//     }
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ message: `No tour exist with id: ${id}` });
+    }
 
-//     const tour = await TourModal.findById(id);
+    const tour = await TourModal.findById(id);
 
-//     const index = tour.likes.findIndex((id) => id === String(req.userId));
+    const index = tour.likes.findIndex((id) => id === String(req.userId));
 
-//     if (index === -1) {
-//       tour.likes.push(req.userId);
-//     } else {
-//       tour.likes = tour.likes.filter((id) => id !== String(req.userId));
-//     }
+    // Add and remove like  
+    if (index === -1) {
+      tour.likes.push(req.userId);
+    } else {
+      tour.likes = tour.likes.filter((id) => id !== String(req.userId));
+    }
 
-//     const updatedTour = await TourModal.findByIdAndUpdate(id, tour, {
-//       new: true,
-//     });
+    const updatedTour = await TourModal.findByIdAndUpdate(id, tour, {
+      new: true,
+    });
 
-//     res.status(200).json(updatedTour);
-//   } catch (error) {
-//     res.status(404).json({ message: error.message });
-//   }
-// };
+    res.status(200).json(updatedTour);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

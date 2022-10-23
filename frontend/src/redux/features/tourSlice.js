@@ -76,6 +76,16 @@ export const searchTours = createAsyncThunk("tour/searchTours", async (searchQue
   }
 );
 
+export const likeTour = createAsyncThunk("tour/likeTour", async ({ _id }, { rejectWithValue }) => {
+    try {
+      const response = await api.likeTour(_id);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
 const tourSlice = createSlice({
     name: "tour",
     initialState: {
@@ -176,6 +186,18 @@ const tourSlice = createSlice({
       },
       [searchTours.rejected]: (state, action) => {
         state.loading = false;
+        state.error = action.payload.message;
+      },
+
+      [likeTour.pending]: (state, action) => {},
+      [likeTour.fulfilled]: (state, action) => {
+        state.loading = false;       
+        const { arg } = action.meta; // Contains post id
+        if(arg){
+          state.tours = state.tours.map((item) => item._id === arg ? action.payload : item);
+        }
+      },
+      [likeTour.rejected]: (state, action) => {
         state.error = action.payload.message;
       },
     },
