@@ -8,6 +8,8 @@ import { getTour } from '../redux/features/tourSlice';
 import moment from "moment";
 // MUI
 import { Box, Typography, Button } from '@mui/material';
+// Disqus 
+import DisqusThread from '../components/DisqusThread/DisqusThread';
 
 const SingleTour = () => {
   const dispatch = useDispatch();
@@ -47,13 +49,7 @@ const SingleTour = () => {
         </Box>
         <Box>
             <Box>
-                <Typography>
-                    Comments
-                </Typography>
-
-                <Button variant='contained'>
-                    Comment
-                </Button>
+                <DisqusThread id={id} title={tour.title} path={`/tour/${id}`}/>
             </Box>
         </Box>
     </Box>
