@@ -193,6 +193,7 @@ const tourSlice = createSlice({
       [likeTour.fulfilled]: (state, action) => {
         state.loading = false;       
         const { arg } = action.meta; // Contains post id
+        
         if(arg){
           state.tours = state.tours.map((item) => item._id === arg ? action.payload : item);
         }

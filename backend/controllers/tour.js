@@ -116,7 +116,7 @@ export const likeTour = async (req, res) => {
     } else {
       tour.likes = tour.likes.filter((id) => id !== String(req.userId));
     }
-
+    
     const updatedTour = await TourModal.findByIdAndUpdate(id, tour, {
       new: true,
     });

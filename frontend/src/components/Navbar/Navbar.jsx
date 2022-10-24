@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // React Router
 import { Link, useNavigate } from 'react-router-dom';
 // MUI
-import { AppBar, Avatar, Box, Button, IconButton, InputBase, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
+import { AppBar, Box, Button, IconButton, InputBase, Menu, MenuItem, Toolbar, Tooltip, Typography } from '@mui/material';
 import { styled, alpha } from '@mui/material/styles';
 import LocalAirportIcon from '@mui/icons-material/LocalAirport';
 import SearchIcon from '@mui/icons-material/Search';
@@ -87,9 +87,10 @@ const Navbar = () => {
     }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} width={1}>
       <AppBar position="static">
         <Toolbar>
+        <Box width='100%' display='flex' alignItems='center' justifyContent='space-between'>
         <Link to='/' className='white-link'>
           <IconButton
             size="large"
@@ -101,9 +102,9 @@ const Navbar = () => {
             <LocalAirportIcon />
           </IconButton>
         </Link>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{ minWidth: '40%' }}>
           <Search>
-              <SearchIconWrapper width='40%'>
+              <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
@@ -117,7 +118,7 @@ const Navbar = () => {
           {user?.result?._id ? (
           <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 4 }}>
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 3 }}>
               <AccountCircleIcon className='white-svg'/>
             </IconButton>
           </Tooltip>
@@ -143,7 +144,7 @@ const Navbar = () => {
                 <Typography textAlign="left" color='black'>Profile</Typography>
                </Link>
                <Link to='/addTour'>
-                <Typography textAlign="center" color='black' mt={1}>Add Tour</Typography>
+                <Typography textAlign="center" color='black' mt={1}>Add Post</Typography>
                </Link>
                <Link to='/login'>
                 <Typography textAlign="left" color='black' mt={1} onClick={handleLogout}>Logout</Typography>
@@ -158,6 +159,7 @@ const Navbar = () => {
                 <Button color="inherit">Login</Button>
             </Link>
           )}
+        </Box>
         </Toolbar>
       </AppBar>
     </Box>

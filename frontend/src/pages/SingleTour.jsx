@@ -38,7 +38,7 @@ const SingleTour = () => {
         </Box>
  
         <Box mt={3}>
-            <img width='100%' src={tour.imageFile} alt="" />
+            <img width='100%' src={tour.imageFile} alt=""/>
         </Box>
 
         <Box display='flex' alignItems='center' justifyContent='space-between' mt={3}>

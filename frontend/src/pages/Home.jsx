@@ -19,7 +19,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Box>
+    <Box display='flex' justifyContent='space-around' flexWrap='wrap'>
       {tours && tours.map((item, index) => (
         <Box key={index} pt={5}>
           <CardTour {...item}/>

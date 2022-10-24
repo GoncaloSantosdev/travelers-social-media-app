@@ -32,13 +32,11 @@ const Profile = () => {
         <Typography variant="h5" component="h2" textAlign='center'>
             Profile: {user?.result?.name}
         </Typography>
-
         <Box mt={6}>
             <Typography variant="h6" component="h3" textAlign='left'>
                 Your Posts
             </Typography>
-
-          <Box>
+          <Box width={1} display='flex' justifyContent='space-between' flexWrap='wrap'> 
             {userTours && userTours.map((item, index) => (
               <Box pt={3}>
                    <Card sx={{ maxWidth: 345 }} key={index}>
