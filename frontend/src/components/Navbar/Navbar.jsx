@@ -6,6 +6,7 @@ import { AppBar, Avatar, Box, Button, IconButton, InputBase, Menu, MenuItem, Too
 import { styled, alpha } from '@mui/material/styles';
 import LocalAirportIcon from '@mui/icons-material/LocalAirport';
 import SearchIcon from '@mui/icons-material/Search';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // Redux
 import { useSelector, useDispatch } from 'react-redux';
 import { setLogout } from '../../redux/features/authSlice';
@@ -116,8 +117,8 @@ const Navbar = () => {
           {user?.result?._id ? (
           <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
-            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 2}}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 4 }}>
+              <AccountCircleIcon className='white-svg'/>
             </IconButton>
           </Tooltip>
           <Menu

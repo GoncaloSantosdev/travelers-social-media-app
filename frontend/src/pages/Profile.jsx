@@ -9,6 +9,7 @@ import { Avatar, Box, Card, CardActions, CardContent, CardHeader, CardMedia, Ico
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Profile = () => {
   const { user } = useSelector((state) => ({...state.auth}));
@@ -27,28 +28,25 @@ const Profile = () => {
   }
 
   return (
-    <Box>
-        <Typography>
+    <Box mt={6}>
+        <Typography variant="h5" component="h2" textAlign='center'>
             Profile: {user?.result?.name}
         </Typography>
 
-        <Box>
-            <Typography>
+        <Box mt={6}>
+            <Typography variant="h6" component="h3" textAlign='left'>
                 Your Posts
             </Typography>
 
+          <Box>
             {userTours && userTours.map((item, index) => (
+              <Box pt={3}>
                    <Card sx={{ maxWidth: 345 }} key={index}>
                    <CardHeader
                      avatar={
                        <Avatar aria-label="recipe">
-                         R
+                         <PersonIcon />
                        </Avatar>
-                     }
-                     action={
-                       <IconButton aria-label="settings">
-                         <MoreVertIcon />
-                       </IconButton>
                      }
                      title={item.title}
                      subheader={item.name}
@@ -75,7 +73,9 @@ const Profile = () => {
                      </IconButton>
                    </CardActions>
                  </Card>
+                </Box>
             ))}
+            </Box>
         </Box>
     </Box>
   )

@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { likeTour } from '../../redux/features/tourSlice';
 // MUI
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from '@mui/material'
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Avatar, Box, Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from '@mui/material'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import PersonIcon from '@mui/icons-material/Person';
 
 const CardTour = ({ imageFile, description, title, _id, name, likes }) => {
   const dispatch = useDispatch();
@@ -24,39 +24,40 @@ const CardTour = ({ imageFile, description, title, _id, name, likes }) => {
     <CardHeader
       avatar={
         <Avatar aria-label="recipe">
-          R
+          <PersonIcon />
         </Avatar>
-      }
-      action={
-        <IconButton aria-label="settings">
-          <MoreVertIcon />
-        </IconButton>
       }
       title={title}
       subheader={name}
     />
     <CardMedia
       component="img"
-      height="194"
+      height="300"
       image={imageFile}
       alt={title}
     />
+
     <CardContent>
       <Typography variant="body2" color="text.secondary">
         {description}
       </Typography>
     </CardContent>
-    <CardActions disableSpacing>
-      <IconButton aria-label="like post" onClick={handleClick}>
-        <ThumbUpIcon />
-        <Typography>{likes.length}</Typography>
-      </IconButton>
-    <Link to={`/tour/${_id}`}>
-      <Button variant='contained'>
-            View More
-      </Button>
-    </Link>
-    </CardActions>
+
+      <CardActions disableSpacing>
+    <Box width={1} display='flex' justifyContent='space-between'>
+        <IconButton aria-label="like post" onClick={handleClick}>
+          <ThumbUpIcon />
+          <Typography ml={1}>{likes.length}</Typography>
+        </IconButton>
+        <Box>
+      <Link to={`/tour/${_id}`}>
+        <Button variant='contained'>
+              View More
+        </Button>
+      </Link>
+        </Box>
+    </Box>
+      </CardActions>
   </Card>
   )
 }

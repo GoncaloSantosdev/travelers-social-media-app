@@ -21,7 +21,7 @@ const Home = () => {
   return (
     <Box>
       {tours && tours.map((item, index) => (
-        <Box key={index}>
+        <Box key={index} pt={5}>
           <CardTour {...item}/>
         </Box>
       ))}

@@ -7,7 +7,9 @@ import { getTour } from '../redux/features/tourSlice';
 // Moment
 import moment from "moment";
 // MUI
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 // Disqus 
 import DisqusThread from '../components/DisqusThread/DisqusThread';
 
@@ -23,31 +25,37 @@ const SingleTour = () => {
   }, [dispatch, id]);
 
   return (
-    <Box>
+    <Box mt={5}>
         <Box>
-            <Typography>
+            <Typography variant="h5" component="h2">
                 {tour.title}
             </Typography>
         </Box>
-        <Box>
+        <Box mt={3}>
             <Typography>
-                {tour.name}
+                Description: {tour.description}
             </Typography>
         </Box>
-        <Box>
-            <Typography>
-                {moment(tour?.createdAt).fromNow()}
-            </Typography>
-        </Box>
-        <Box>
-            <Typography>
-                {tour.description}
-            </Typography>
-        </Box>
-        <Box>
+ 
+        <Box mt={3}>
             <img width='100%' src={tour.imageFile} alt="" />
         </Box>
-        <Box>
+
+        <Box display='flex' alignItems='center' justifyContent='space-between' mt={3}>
+            <Box display='flex' alignItems='center'>
+                <AccountCircleIcon /> 
+                <Typography ml={1}>
+                    {tour.name}
+                </Typography>
+            </Box>
+            <Box display='flex' alignItems='center'>
+                <CalendarMonthIcon/>
+                <Typography ml={1}>
+                    {moment(tour?.createdAt).fromNow()}
+                </Typography>
+            </Box>
+        </Box>
+        <Box mt={5}>
             <Box>
                 <DisqusThread id={id} title={tour.title} path={`/tour/${id}`}/>
             </Box>
